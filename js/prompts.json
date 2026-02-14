@@ -1,0 +1,295 @@
+[
+  {
+    "slide": 2,
+    "type": "master",
+    "label": "Explore this slide",
+    "prompt": "I just learned that training a frontier AI model costs over $100M (GPT-4: $100M+, Llama 3 hardware: $720M), while inference costs have dropped 280x in just 2 years to roughly $0.0001 per query. The presenter argues that this gap between massive fixed costs and near-zero marginal costs IS the fundamental economics of AI. As a {{profession}} who is curious about {{curiosity}}, help me understand: (1) What other industries have had this extreme fixed-cost vs. marginal-cost structure, and what happened to them? (2) What does this cost structure imply for who gets to build AI vs. who gets to use it? (3) How might this dynamic specifically affect my field?"
+  },
+  {
+    "slide": 2,
+    "type": "verify",
+    "label": "$100M+ to train a frontier model",
+    "prompt": "The claim is that training a single frontier AI model costs $100M+ (with Llama 3's hardware alone at $720M). As a {{profession}}, help me verify this: What are the original sources for these numbers? Have training costs continued to rise since 2024, or are there countervailing trends like DeepSeek's efficiency gains? What does this mean for the feasibility of AI development in my country or sector?",
+    "hotspot": { "x": 5, "y": 11, "w": 42, "h": 44 }
+  },
+  {
+    "slide": 2,
+    "type": "verify",
+    "label": "280x price drop in inference",
+    "prompt": "Inference costs for GPT-3.5-level AI dropped 280x between 2022 and 2024. As a {{profession}} curious about {{curiosity}}, walk me through: What drove this dramatic cost decline? Is this rate of decline sustainable? And what happens to AI adoption patterns when using AI becomes essentially free — does usage just keep growing (the Jevons Paradox), or do we hit other limits?",
+    "hotspot": { "x": 52, "y": 11, "w": 43, "h": 44 }
+  },
+  {
+    "slide": 2,
+    "type": "apply",
+    "label": "Who can afford to produce AI?",
+    "prompt": "The key question posed is: \"Who can afford to produce AI, and who captures the value from consuming it?\" As a {{profession}}, this matters to me because my work intersects with AI in specific ways. Help me think through: Who are the current producers and why? What would it take for new entrants (smaller companies, developing nations, academic institutions) to compete? And where does someone in my role fit — am I a producer, consumer, or something else entirely?",
+    "hotspot": { "x": 5, "y": 88, "w": 92, "h": 8 }
+  },
+
+  {
+    "slide": 3,
+    "type": "master",
+    "label": "Explore this slide",
+    "prompt": "The presentation uses an oil & gas value chain analogy to explain AI economics: Upstream (cost of producing AI — silicon, data, training, energy, talent), Midstream (market structure — oligopoly, barriers, open source, geopolitics), and Downstream (who benefits — pricing, agentic economy, labor markets, value capture). As a {{profession}} curious about {{curiosity}}, help me understand: (1) Where in this value chain does my profession or sector fit? (2) Is the oil & gas analogy helpful or misleading — where does it break down? (3) Which part of this pipeline should I pay most attention to for understanding AI's impact on my work?"
+  },
+
+  {
+    "slide": 5,
+    "type": "master",
+    "label": "Explore this slide",
+    "prompt": "I just learned about two forces shaping AI hardware: Moore's Law (transistor density doubles every ~2 years, improving performance) and Rock's Law (fab costs double every ~4 years, concentrating production). The result is that only TSMC, Samsung, and Intel can make cutting-edge chips, with a single fab costing $20B+. Meanwhile, training clusters like Meta's Llama 3 used 24,000 H100 GPUs costing $720M in hardware alone. As a {{profession}} curious about {{curiosity}}, help me understand: (1) Why does this concentration in chip manufacturing matter for AI competition globally? (2) What are the geopolitical implications of this concentration? (3) Is this hardware concentration likely to increase or decrease, and what would change the trajectory?"
+  },
+  {
+    "slide": 5,
+    "type": "verify",
+    "label": "Moore's Law vs. Rock's Law",
+    "prompt": "Moore's Law says transistor density doubles every ~2 years (performance improves), while Rock's Law says fab costs double every ~4 years (building chips gets harder). As a {{profession}}, help me understand: Are both \"laws\" still holding? What happens if Moore's Law slows down — does AI progress stall? And what are the alternatives (new architectures, quantum computing, neuromorphic chips) that could change this picture?",
+    "hotspot": { "x": 3, "y": 12, "w": 46, "h": 62 }
+  },
+  {
+    "slide": 5,
+    "type": "apply",
+    "label": "The Gigacluster Buildout",
+    "prompt": "Meta's Llama 3 required 24,000 H100 GPUs ($720M in hardware alone), and Sam Altman envisions 1GW compute clusters coming online weekly by 2030. As a {{profession}} curious about {{curiosity}}, help me think through: What are the real-world constraints on this buildout (energy, water, land, supply chain)? How does this level of infrastructure investment compare to other major industrial buildouts in history? And what happens to communities where these clusters are built?",
+    "hotspot": { "x": 51, "y": 12, "w": 47, "h": 62 }
+  },
+
+  {
+    "slide": 6,
+    "type": "master",
+    "label": "Explore this slide",
+    "prompt": "The presentation argues that data is now the binding constraint for AI: the training data market is $2.6-3.2B (2024), Anthropic settled copyright claims for $1.5B (2025), and high-quality public text may be exhausted by 2026-32. Three dynamics are reshaping data economics: (1) shift from scraping to licensing, (2) quality over quantity (Microsoft's Phi-1 was 1,000-10,000x more cost-effective through curation), and (3) synthetic data as a wildcard (60-80% cheaper but with model collapse risk). As a {{profession}} curious about {{curiosity}}, help me understand: What does \"data running out\" actually mean in practice? How does this shift from free scraping to paid licensing change who can build AI? And what are the implications for my field specifically?"
+  },
+  {
+    "slide": 6,
+    "type": "verify",
+    "label": "From scraping to licensing",
+    "prompt": "Reddit now charges Google and OpenAI $60-70M/year for data access, and individual books cost $2,500-5,000 per title for AI training rights. As a {{profession}}, help me understand: How does putting a price on data change the AI landscape? Who benefits from this shift — content creators, platforms, or both? And what does this mean for the quality and diversity of AI training data going forward?",
+    "hotspot": { "x": 5, "y": 50, "w": 92, "h": 10 }
+  },
+  {
+    "slide": 6,
+    "type": "steelman",
+    "label": "Synthetic data and model collapse",
+    "prompt": "Synthetic training data is 60-80% cheaper than real data, but there's a risk of \"model collapse\" — where AI trained on AI-generated data degrades in quality. Hybrid approaches using 70-80% real data seem optimal. As a {{profession}} curious about {{curiosity}}, explain model collapse to me in intuitive terms. What are the implications if synthetic data works well? What if it doesn't? And how might this affect the gap between well-resourced AI labs and everyone else?",
+    "hotspot": { "x": 5, "y": 72, "w": 92, "h": 10 }
+  },
+
+  {
+    "slide": 7,
+    "type": "master",
+    "label": "Explore this slide",
+    "prompt": "I learned that training is a one-time capital expenditure (10-20% of costs) while inference is continuous operating expenditure (80-90% of costs — like building vs. running a factory). Inference costs have dropped 280x for GPT-3.5-level performance (2022-2024), driven by better chips, quantization, distillation, and MoE architectures. But the Jevons Paradox suggests cheaper AI drives MORE total usage, not less spending. DeepSeek proved that efficiency can rival raw scale. As a {{profession}} curious about {{curiosity}}, help me understand: (1) Why does the training vs. inference split matter strategically? (2) How does the Jevons Paradox apply to AI — will we ever spend less on AI? (3) What does the DeepSeek moment mean for competition in AI?"
+  },
+  {
+    "slide": 7,
+    "type": "steelman",
+    "label": "The Jevons Paradox",
+    "prompt": "The Jevons Paradox (from 19th century coal economics) suggests that when something becomes more efficient to use, total consumption goes UP, not down. Applied to AI: as inference gets cheaper, total AI spending keeps rising. As a {{profession}}, help me explore: Is this paradox inevitable for AI? What historical examples best illustrate it? And what does this mean for AI's environmental footprint and resource demands — will efficiency gains actually help, or just fuel more growth?",
+    "hotspot": { "x": 51, "y": 68, "w": 46, "h": 12 }
+  },
+  {
+    "slide": 7,
+    "type": "verify",
+    "label": "The DeepSeek moment",
+    "prompt": "DeepSeek demonstrated competitive AI performance at a fraction of the cost of frontier labs, proving efficiency can rival raw scale. As a {{profession}} curious about {{curiosity}}, help me understand: What exactly did DeepSeek do differently? Does this mean the barrier to entry for AI is actually lower than the big labs suggest? And what are the implications for the US-China AI competition, given that DeepSeek is a Chinese lab operating under chip export controls?",
+    "hotspot": { "x": 51, "y": 52, "w": 46, "h": 14 }
+  },
+
+  {
+    "slide": 8,
+    "type": "master",
+    "label": "Explore this slide",
+    "prompt": "AI is \"recoupling\" economic growth with electricity demand: by 2030, US data centers may consume 12% of total electricity (more than steel, chemicals, and aluminum combined). A single large data center uses 5M gallons of water per day. Meanwhile, top ML researchers earn $1-10M+, and the data labeling workforce is concentrated in Kenya, the Philippines, and India through geographic arbitrage. The presentation introduces the concept of \"energy gentrification\" — data centers competing with homes, schools, and businesses for finite grid capacity. As a {{profession}} curious about {{curiosity}}, help me understand: (1) How serious is the energy constraint for AI growth? (2) What is \"energy gentrification\" and where is it already happening? (3) What does the extreme talent concentration mean for AI competition?"
+  },
+  {
+    "slide": 8,
+    "type": "apply",
+    "label": "Energy gentrification",
+    "prompt": "\"Energy gentrification\" means data centers compete with homes, schools, and local businesses for finite grid capacity — when AI arrives in a region, it reshapes who gets access to power. As a {{profession}}, help me explore this concept: Where is this already happening? What are the equity implications? How should policymakers think about allocating scarce energy between AI infrastructure and community needs? Are there analogies from other industries that moved into communities and consumed disproportionate resources?",
+    "hotspot": { "x": 3, "y": 65, "w": 94, "h": 18 }
+  },
+  {
+    "slide": 8,
+    "type": "apply",
+    "label": "The invisible workforce",
+    "prompt": "Behind every AI model is an \"invisible workforce\" of data labelers, primarily in Kenya, the Philippines, and India, doing RLHF (reinforcement learning from human feedback) work. Scale AI's average contract is $93K, but much of this work is low-paid relative to its importance. As a {{profession}} curious about {{curiosity}}, help me understand: What exactly do data labelers do and why is it essential? How does this geographic arbitrage in AI labor compare to earlier waves of outsourcing? And what happens to this workforce as AI becomes more capable of labeling its own data?",
+    "hotspot": { "x": 52, "y": 12, "w": 46, "h": 52 }
+  },
+
+  {
+    "slide": 10,
+    "type": "master",
+    "label": "Explore this slide",
+    "prompt": "The AI market as of February 2026 is a two-tier oligopoly. Tier 1 (frontier labs): Anthropic (Claude Opus 4.6, safety-first), OpenAI (GPT-5.3 Codex, self-debugging), and Google DeepMind (Gemini Ultra, TPU advantage). Tier 2 (challengers): xAI, Mistral, and others differentiating rather than competing directly. Then there's open source (Meta's Llama: \"commoditize the complement\") and the Chinese parallel ecosystem (DeepSeek, Baidu, Alibaba, ByteDance operating under chip controls). As a {{profession}} curious about {{curiosity}}, help me understand: (1) Why does it matter that there are only 3 frontier labs? (2) How stable is this oligopoly — what could disrupt it? (3) What does this market structure mean for someone in my position who uses or is affected by AI?"
+  },
+  {
+    "slide": 10,
+    "type": "apply",
+    "label": "Commoditize the complement",
+    "prompt": "Meta gives away Llama for free as a strategy called \"commoditize the complement\" — if your business depends on X, make X's complement cheap. Meta profits from ads and engagement, not model access. As a {{profession}}, help me understand this strategy deeply: What exactly is Meta commoditizing, and why? How does this affect the pricing power of closed labs like Anthropic and OpenAI? What are historical examples of this strategy (GPS, Android, etc.)? And who benefits most — developers, consumers, or Meta itself?",
+    "hotspot": { "x": 35, "y": 48, "w": 30, "h": 35 }
+  },
+  {
+    "slide": 10,
+    "type": "steelman",
+    "label": "The Chinese parallel ecosystem",
+    "prompt": "China is building a parallel AI ecosystem under US chip export controls, with DeepSeek, Baidu, Alibaba, and ByteDance all developing frontier models. The presentation notes China's manufacturing strength positions AI as a commodity. As a {{profession}} curious about {{curiosity}}, help me think through: What does a bifurcated global AI ecosystem mean? How effective are chip export controls at slowing Chinese AI? And what are the implications for countries like India that may need to choose between ecosystems — or find a way to work with both?",
+    "hotspot": { "x": 67, "y": 48, "w": 31, "h": 35 }
+  },
+
+  {
+    "slide": 11,
+    "type": "master",
+    "label": "Explore this slide",
+    "prompt": "The presentation identifies four self-reinforcing barriers to AI market entry: (1) Capital — minimum $1B+ to compete at frontier, (2) Talent — ~1,000 people worldwide can lead frontier training, at $1-10M compensation, (3) Data & Knowledge — accumulated techniques, proprietary datasets, RLHF loops, institutional learning, and (4) Scale Economies — fixed costs spread over millions of users, first-mover brand recognition, network effects. Each barrier reinforces the others: capital buys talent, talent creates data moats, data moats require scale. As a {{profession}} curious about {{curiosity}}, help me analyze: (1) Are these barriers increasing or decreasing over time? (2) What would it actually take for a genuinely new entrant to break in? (3) How do these barriers compare to other oligopolistic industries (pharma, telecom, aerospace)?"
+  },
+  {
+    "slide": 11,
+    "type": "steelman",
+    "label": "Are barriers increasing or decreasing?",
+    "prompt": "The slide asks whether barriers to entering the AI market are increasing or decreasing. As a {{profession}}, help me think through both sides: What evidence suggests barriers are falling (open source, cheaper hardware, better techniques)? What evidence suggests they're rising (data costs, regulatory burden, talent scarcity)? And what's the net effect — is this market becoming more or less concentrated?",
+    "hotspot": { "x": 5, "y": 76, "w": 92, "h": 8 }
+  },
+
+  {
+    "slide": 12,
+    "type": "master",
+    "label": "Explore this slide",
+    "prompt": "Open source AI (primarily Meta's Llama) is framed as the most powerful competitive force in AI — not charity, but strategy. The analogy: Google Maps destroyed standalone GPS devices (Garmin, TomTom) by making navigation free, because Google profits from knowing where you go, not from selling maps. Similarly, Meta gives away Llama because it profits from ads and engagement, not model access. Open source creates a price ceiling for closed labs. The quality gap is narrowing but frontier closed models still lead on reasoning, safety, and specialized tasks. As a {{profession}} curious about {{curiosity}}, help me understand: (1) What does the GPS/Google Maps analogy reveal — and where does it break down? (2) Can open source AI close the quality gap without billions in capital? (3) What does this mean for the long-term pricing and accessibility of AI?"
+  },
+  {
+    "slide": 12,
+    "type": "steelman",
+    "label": "The sustainability question",
+    "prompt": "The presentation asks whether open-source AI can close the gap with frontier models without billions in capital, concluding that it can only do so if backed by a tech giant like Meta with different incentives. As a {{profession}} curious about {{curiosity}}, help me explore: Is this true? Could a community-driven open source effort (like Linux) succeed in AI? What are the key differences between open-source software and open-source AI that make this harder? And what happens if Meta decides Llama is no longer strategically useful?",
+    "hotspot": { "x": 3, "y": 58, "w": 58, "h": 18 }
+  },
+  {
+    "slide": 12,
+    "type": "apply",
+    "label": "The price ceiling effect",
+    "prompt": "If Llama is \"good enough\" for free, how much can Claude or GPT charge? Open source creates a price ceiling for commercial AI. As a {{profession}}, help me think through: How do commercial AI labs justify their pricing when free alternatives exist? What exactly do you get from paid AI that you don't get from open source? And is this dynamic good or bad for AI adoption and innovation overall?",
+    "hotspot": { "x": 3, "y": 35, "w": 58, "h": 12 }
+  },
+
+  {
+    "slide": 13,
+    "type": "master",
+    "label": "Explore this slide",
+    "prompt": "Nvidia controls 80-90% of the AI GPU market with CUDA creating software lock-in. Tech giants are vertically integrating: Google makes chips (TPU) + models + apps; Microsoft pairs with OpenAI for compute + distribution; Anthropic partners with Amazon/Google for cloud. US-China chip controls are creating parallel AI ecosystems. The EU leads with regulation (AI Act). India is largely a consumer and service provider (data labeling, IT services integration), not a frontier AI producer. As a {{profession}} curious about {{curiosity}}, help me understand: (1) Why does vertical integration matter — who captures value in this structure? (2) What does Nvidia's CUDA lock-in mean practically? (3) What is India's realistic path in the AI value chain — should it try to become a producer, or is the downstream position strategically valuable?"
+  },
+  {
+    "slide": 13,
+    "type": "apply",
+    "label": "India's position in AI",
+    "prompt": "India is a major player in AI services (data labeling, RLHF workforce, IT services integration) but not in frontier model production. India's AI policy focuses on deployment and adoption rather than foundational R&D. As a {{profession}} curious about {{curiosity}}, help me analyze: What would India need to become a frontier AI producer? Is that even the right goal, or could India's downstream position be strategically valuable — like being the world's pharmacy rather than the world's pharma R&D lab? What lessons can India draw from its IT services success story?",
+    "hotspot": { "x": 3, "y": 56, "w": 94, "h": 26 }
+  },
+  {
+    "slide": 13,
+    "type": "verify",
+    "label": "Nvidia's CUDA lock-in",
+    "prompt": "Nvidia holds 80-90% of the AI GPU market, and CUDA (its programming framework) creates deep software lock-in. As a {{profession}}, help me understand: What exactly is CUDA lock-in and why is it so powerful? What alternatives exist (AMD ROCm, Google TPUs, custom chips) and why haven't they broken Nvidia's dominance? Is this level of concentration in a critical technology sustainable, and what could change it?",
+    "hotspot": { "x": 3, "y": 14, "w": 30, "h": 35 }
+  },
+
+  {
+    "slide": 15,
+    "type": "master",
+    "label": "Explore this slide",
+    "prompt": "AI pricing has converged on similar price points: $20/month (Plus) and $200/month (Pro) across both OpenAI and Anthropic. Revenue comes from three layers: consumer subscriptions, API per-token pricing, and enterprise deals ($100K-millions/yr). The most striking insight: someone paying $20/month may extract $500/month in value — a $480 consumer surplus gap. AI may be the most underpriced technology in history relative to value created. The future may bring outcome-based pricing (pay for results, not tokens). As a {{profession}} curious about {{curiosity}}, help me understand: (1) Why did competitors converge on the same price points — is this coincidence or tacit coordination? (2) What does the massive consumer surplus mean for the AI industry's future? (3) How might outcome-based pricing work, and what would it mean for my field?"
+  },
+  {
+    "slide": 15,
+    "type": "apply",
+    "label": "The consumer surplus gap",
+    "prompt": "If someone pays $20/month for AI but extracts $500/month in value (saved time, better work), that $480 gap is consumer surplus. The presentation argues AI may be the most underpriced technology in history. As a {{profession}}, help me explore: How would you estimate the actual value AI creates for someone in my role? What happens when AI companies figure out how to capture more of this surplus (through higher prices, outcome-based pricing, or other mechanisms)? And is this underpricing deliberate (to drive adoption) or a sign that the market hasn't matured yet?",
+    "hotspot": { "x": 3, "y": 58, "w": 94, "h": 22 }
+  },
+  {
+    "slide": 15,
+    "type": "steelman",
+    "label": "Price convergence puzzle",
+    "prompt": "Both OpenAI and Anthropic independently arrived at $20/month (Plus) and $200/month (Pro) pricing. As a {{profession}} curious about {{curiosity}}, help me think through: Is this coincidence, tacit coordination, or simply the economics pointing to the same answer? What does game theory tell us about pricing in oligopolies? And what would disrupt this pricing equilibrium — a new entrant, open source reaching parity, or something else?",
+    "hotspot": { "x": 3, "y": 9, "w": 48, "h": 44 }
+  },
+
+  {
+    "slide": 16,
+    "type": "master",
+    "label": "Explore this slide",
+    "prompt": "The agentic AI economy is projected to grow from $4.5B (2025) to $98B (2033), with 1 billion AI agents predicted by end of 2026. Examples: Claude Code and GPT Codex are autonomous coding agents (not autocomplete — they decide, do, and verify). OpenClaw is a personal AI assistant with 150K+ GitHub stars. MCP (Model Context Protocol, donated to Linux Foundation, 97M monthly SDK downloads) standardizes how agents connect to tools — like HTTP for agent-to-service communication. As a {{profession}} curious about {{curiosity}}, help me understand: (1) What's the difference between AI as a tool vs. AI as an agent — why does this distinction matter? (2) What does MCP do and why is it being compared to HTTP? (3) How might autonomous AI agents affect my profession specifically?"
+  },
+  {
+    "slide": 16,
+    "type": "apply",
+    "label": "AI agents in my field",
+    "prompt": "Claude Code operates in \"decide -> do -> verify\" loops and GPT-5.3 Codex debugged its own training run — these are autonomous AI developers, not autocomplete. As a {{profession}} curious about {{curiosity}}, help me envision: What would an autonomous AI agent look like in my field? What tasks could it handle end-to-end? What tasks would still need human oversight? And what new roles or skills would emerge as a result?",
+    "hotspot": { "x": 3, "y": 28, "w": 31, "h": 55 }
+  },
+  {
+    "slide": 16,
+    "type": "verify",
+    "label": "MCP as infrastructure",
+    "prompt": "The Model Context Protocol (MCP), donated to the Linux Foundation with 97M monthly SDK downloads, standardizes how AI agents connect to external tools and services — described as \"HTTP for agent-to-service communication.\" As a {{profession}}, help me understand: What problem does MCP solve? Why does standardization matter for the agentic economy (think about what HTTP did for the web)? And what does it mean that this infrastructure is being built as an open standard rather than a proprietary protocol?",
+    "hotspot": { "x": 67, "y": 28, "w": 31, "h": 55 }
+  },
+
+  {
+    "slide": 17,
+    "type": "master",
+    "label": "Explore this slide",
+    "prompt": "The presentation invokes Robert Solow's 1987 quote: \"You can see the computer age everywhere but in the productivity statistics\" — and asks if we're repeating this with AI. The Acemoglu-Restrepo framework says AI automates tasks, not entire jobs. Jobs are bundles of tasks — some get automated (data entry, basic analysis, routine writing), others get complemented (strategic thinking, complex problem-solving, interpersonal skills). There's also an \"implementation J-curve\" where productivity dips before rising. Historical pace: electricity took 40 years, computers 20-30 years, internet 10-15 years. As a {{profession}} curious about {{curiosity}}, help me understand: (1) Which specific tasks in my profession are most likely to be automated vs. complemented? (2) What is the implementation J-curve and where are we on it? (3) Why does it take so long for transformative technologies to show up in productivity statistics?"
+  },
+  {
+    "slide": 17,
+    "type": "apply",
+    "label": "Tasks in my job",
+    "prompt": "The Acemoglu-Restrepo framework divides tasks into \"automated\" (data entry, basic analysis, scheduling, routine writing, simple code) and \"complemented\" (strategic thinking, complex problem-solving, interpersonal skills, creativity requiring deep context). As a {{profession}}, help me do a task-level analysis of my own work: List the major tasks I likely perform. For each, assess whether AI is more likely to automate it, complement it, or leave it unchanged. Then identify: where should I invest my time to stay valuable? What new tasks might emerge that don't exist yet?",
+    "hotspot": { "x": 3, "y": 26, "w": 48, "h": 60 }
+  },
+  {
+    "slide": 17,
+    "type": "steelman",
+    "label": "The Solow Paradox for AI",
+    "prompt": "Robert Solow said in 1987: \"You can see the computer age everywhere but in the productivity statistics.\" The presentation asks if we're repeating this with AI. As a {{profession}} curious about {{curiosity}}, help me explore: Why did computers take decades to boost measured productivity? What's different about AI that might speed this up — or slow it down? What does the \"implementation J-curve\" mean practically — should we expect things to get harder before they get easier? And what would be the first signs that AI is genuinely boosting productivity at scale?",
+    "hotspot": { "x": 3, "y": 10, "w": 94, "h": 14 }
+  },
+
+  {
+    "slide": 18,
+    "type": "master",
+    "label": "Explore this slide",
+    "prompt": "The presentation identifies five dimensions of AI inequality: (1) Capital vs. Labor — AI labs capture producer surplus, workers face displacement, (2) AI-adopters vs. laggards — a new digital divide, (3) High-skill vs. low-skill — AI currently complements high-skill work but may substitute for it with future models, (4) Producers vs. consumers — US and China produce AI, others consume it, (5) Present vs. future — AI investment may crowd out other R&D, infrastructure, education. The concluding question: \"When AI can do most tasks, where does human comparative advantage lie?\" As a {{profession}} curious about {{curiosity}}, help me think through: (1) Which of these five dimensions affects me most directly? (2) Where does human comparative advantage lie if AI can do most cognitive tasks? (3) What policy responses could help ensure the gains from AI are broadly shared?"
+  },
+  {
+    "slide": 18,
+    "type": "apply",
+    "label": "Human comparative advantage",
+    "prompt": "\"When AI can do most tasks, where does human comparative advantage lie?\" As a {{profession}} curious about {{curiosity}}, help me think deeply: What can humans do that AI cannot (now and in the foreseeable future)? Is comparative advantage about ability, or about what society values being done by humans? How should I personally position myself? And what does economics (specifically Ricardo's theory of comparative advantage) actually tell us — is it possible for humans to retain comparative advantage even if AI has absolute advantage in everything?",
+    "hotspot": { "x": 3, "y": 80, "w": 94, "h": 14 }
+  },
+  {
+    "slide": 18,
+    "type": "apply",
+    "label": "Five dimensions of AI inequality",
+    "prompt": "The five dimensions of AI inequality are: capital vs. labor, AI-adopters vs. laggards, high-skill vs. low-skill, producers vs. consumers, and present vs. future. As a {{profession}}, help me apply each of these to my specific context: For each dimension, where do I (and my sector) fall? Which dimension is most consequential for my field? What concrete actions could mitigate the inequality risks I face? And are there dimensions of AI inequality missing from this list?",
+    "hotspot": { "x": 3, "y": 15, "w": 94, "h": 62 }
+  },
+
+  {
+    "slide": 19,
+    "type": "master",
+    "label": "Explore the 12 takeaways",
+    "prompt": "The presentation distills its argument into 12 takeaways across three sections. Upstream: (1) massive irreversible fixed costs, (2) data running out, (3) cost decay + Jevons Paradox, (4) energy and talent concentration. Midstream: (5) two-tier oligopoly with self-reinforcing barriers, (6) open source as strategic force, (7) vertical integration + geopolitics reshaping competition, (8) India largely downstream. Downstream: (9) agentic economy as next frontier, (10) enormous consumer surplus, (11) task-by-task labor transformation, (12) who captures the gains. As a {{profession}} curious about {{curiosity}}, pick the 3 takeaways most relevant to my work and help me: (1) Go deeper on each — what are the second-order implications? (2) Identify what I should be paying attention to over the next 12 months. (3) Suggest one concrete action I should take based on each takeaway."
+  },
+
+  {
+    "slide": 20,
+    "type": "master",
+    "label": "Synthesize my learning",
+    "prompt": "Having gone through this presentation on the Economics of AI, I now understand that \"the economics of AI is the economics of concentration: massive fixed costs, near-zero marginal costs, and a small number of firms reshaping how the world works.\" As a {{profession}} curious about {{curiosity}}, help me synthesize what I've learned into an actionable framework: (1) What are the 3 most important things I should remember from this presentation? (2) What should I read next to deepen my understanding? (3) What's one thing I should do differently in my work starting this week, based on what I've learned?"
+  }
+]

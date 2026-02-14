@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Use Your Prompts — Economics of AI</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <a href="slides.html" class="header-left" style="color: #fff; text-decoration: none;">
+      <span style="font-size: 1.15rem; opacity: 0.85;">&larr;</span>
+      <span class="header-title">How to Use Your Prompts</span>
+    </a>
+  </header>
+
+  <div class="page-content">
+    <div class="help-container">
+      <h1>Continue Your Learning Journey</h1>
+      <p class="help-subtitle">
+        You've collected personalized prompts from the presentation. Download them as a <code>.md</code> file and upload it to any LLM to start a deep learning conversation.
+      </p>
+
+      <!-- Download + Preview buttons -->
+      <div class="help-actions" id="help-actions">
+        <button class="btn btn-primary" id="help-download-btn">Download .md File</button>
+        <button class="btn btn-outline" id="help-preview-btn">Preview</button>
+      </div>
+      <p class="help-empty-note" id="help-empty-note" style="display:none;">
+        You haven't collected any prompts yet. <a href="slides.html">Go back to the slides</a> and click on some prompts first.
+      </p>
+
+      <h2>Getting Started</h2>
+      <ol class="help-steps">
+        <li>
+          <span class="step-number">1</span>
+          <span>Click <strong>"Download .md File"</strong> above to save your personalized prompts.</span>
+        </li>
+        <li>
+          <span class="step-number">2</span>
+          <span>Open any LLM &mdash; <a href="https://claude.ai" target="_blank">Claude</a>, <a href="https://chatgpt.com" target="_blank">ChatGPT</a>, <a href="https://gemini.google.com" target="_blank">Gemini</a>, or any other &mdash; and upload <strong>both</strong> the <code>.md</code> file <strong>and</strong> the original presentation (<code>.pptx</code>). The <code>.md</code> file gives the LLM your personalized prompts and context; the <code>.pptx</code> gives it the full visual content of every slide.</span>
+        </li>
+        <li>
+          <span class="step-number">3</span>
+          <span>The LLM will pick up your context &mdash; your profession, curiosity, and the topics you explored &mdash; and start a personalized learning conversation.</span>
+        </li>
+        <li>
+          <span class="step-number">4</span>
+          <span><strong>Optional:</strong> Edit the <code>.md</code> file before uploading. Add your own questions, remove prompts you don't need, rearrange the order. The more you make it yours, the better.</span>
+        </li>
+      </ol>
+
+      <h2>How the Prompts Work</h2>
+      <ul>
+        <li>Each prompt is tailored to your profession and curiosity.</li>
+        <li>The file includes only the slides you interacted with &mdash; your personal trail through the presentation.</li>
+        <li>At the end, there's a <strong>meta-prompt</strong> that summarizes your journey and asks the LLM to continue guiding you.</li>
+      </ul>
+
+      <h2>Tips for Best Results</h2>
+      <ul>
+        <li>The <strong>meta-prompt</strong> at the end of the file is yours to customize. Edit it before uploading &mdash; cross-reference a book you've read, a podcast episode that stuck with you, a real problem you're facing at work. The more specific you make it, the better the conversation.</li>
+        <li>Individual prompts work great for deep-diving into specific topics.</li>
+        <li>Feel free to try different LLMs &mdash; each will give you a different perspective on the same material.</li>
+      </ul>
+
+      <div class="help-back">
+        <button class="btn btn-primary" onclick="window.location.href='slides.html'">
+          &larr; Back to Slides
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preview Modal -->
+  <div class="preview-overlay" id="preview-overlay">
+    <div class="preview-modal">
+      <div class="preview-header">
+        <h3>Prompt File Preview</h3>
+        <button class="preview-close" id="preview-close">&times;</button>
+      </div>
+      <div class="preview-body" id="preview-body"></div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    'use strict';
+
+    // Read stored data
+    const intakeRaw = localStorage.getItem('econ-ai-intake');
+    const intake = intakeRaw ? JSON.parse(intakeRaw) : null;
+    const collectedRaw = sessionStorage.getItem('econ-ai-collected');
+    const collectedPrompts = collectedRaw ? JSON.parse(collectedRaw) : [];
+
+    const downloadBtn = document.getElementById('help-download-btn');
+    const previewBtn = document.getElementById('help-preview-btn');
+    const actionsEl = document.getElementById('help-actions');
+    const emptyNote = document.getElementById('help-empty-note');
+    const overlay = document.getElementById('preview-overlay');
+    const closeBtn = document.getElementById('preview-close');
+    const previewBody = document.getElementById('preview-body');
+
+    // Show empty state if no prompts
+    if (collectedPrompts.length === 0) {
+      actionsEl.style.display = 'none';
+      emptyNote.style.display = 'block';
+    }
+
+    // Generate .md content
+    function generateMd() {
+      if (!intake || collectedPrompts.length === 0) return '';
+
+      const date = new Date().toLocaleDateString('en-US', {
+        year: 'numeric', month: 'long', day: 'numeric'
+      });
+
+      const grouped = {};
+      collectedPrompts.forEach(function (p) {
+        if (!grouped[p.slide]) {
+          grouped[p.slide] = { title: p.title, prompts: [] };
+        }
+        grouped[p.slide].prompts.push(p);
+      });
+
+      const slideNumbers = Object.keys(grouped).map(Number).sort(function (a, b) { return a - b; });
+      const topicsExplored = slideNumbers.map(function (n) { return grouped[n].title; }).join(', ');
+
+      var md = '# Economics of AI \u2014 Personal Learning Prompts\n\n---\n\n';
+      md += '## INSTRUCTIONS FOR THE AI TUTOR\n\n';
+      md += '**Please read these instructions carefully before proceeding.**\n\n';
+      md += 'You are acting as a **personalized tutor** for the learner described below. They attended a lecture on the Economics of AI and collected a set of prompts based on topics that caught their interest. Your role is to help them explore these topics deeply, at their own pace.\n\n';
+      md += '**Before you begin**, check whether the learner has also uploaded the original .pptx presentation file alongside this document. If they have, use the slide content to provide richer, more specific responses \u2014 reference specific charts, diagrams, and data points when answering each prompt. If they have NOT uploaded the .pptx, gently let them know that uploading it will significantly improve the conversation, and ask if they\'d like to add it before you start.\n\n';
+      md += '### How this conversation should work:\n\n';
+      md += '1. **One question at a time.** Start with the first prompt below (under "Collected Prompts"). Address it thoroughly \u2014 explain concepts clearly, use examples relevant to the learner\'s profession, and invite follow-up questions.\n\n';
+      md += '2. **Have a real conversation.** After your initial response to each prompt, wait for the learner to ask follow-ups, challenge your answer, or say they\'re satisfied. Do NOT move to the next prompt until the learner explicitly says something like "next question," "move on," or "let\'s continue."\n\n';
+      md += '3. **Tailor everything** to the learner\'s profession and curiosity (described below). Use concrete examples from their field. Avoid generic explanations when you can be specific.\n\n';
+      md += '4. **At the end of the conversation**, once all prompts have been discussed (or the learner says they\'re done), generate a **Learning Pack** \u2014 a nicely formatted document that includes:\n';
+      md += '   - **Top Takeaways**: 5-7 key insights from the entire conversation\n';
+      md += '   - **Things to Note**: Important nuances, caveats, or counterarguments that came up\n';
+      md += '   - **Further Reading**: 5-10 specific books, papers, articles, or resources to explore next\n';
+      md += '   - **Conversation Summary**: A concise narrative summary of everything discussed, organized by topic\n\n';
+      md += 'Format the Learning Pack clearly with headers and bullet points so the learner can save it as a reference document.\n\n';
+      md += '---\n\n';
+      md += '## About the Learner\n';
+      md += '- **Name**: ' + (intake.name || 'Not provided') + '\n';
+      md += '- **Role/Profession**: ' + intake.profession + '\n';
+      md += '- **Curiosity**: ' + intake.curiosity + '\n';
+      md += '- **Date**: ' + date + '\n\n';
+      md += '---\n\n';
+      md += '## Collected Prompts\n\n';
+      md += 'The learner clicked on these prompts during the presentation. Handle them **one at a time**, in order.\n\n';
+
+      slideNumbers.forEach(function (slideNum, idx) {
+        var group = grouped[slideNum];
+        md += '### ' + (idx + 1) + '. Slide ' + slideNum + ': ' + group.title + '\n\n';
+        group.prompts.forEach(function (p) {
+          md += '**' + p.label + '**\n\n';
+          md += p.prompt + '\n\n';
+        });
+        md += '---\n\n';
+      });
+
+      md += '## Continue the Learning Journey\n\n';
+      md += 'Once you\'ve worked through all the prompts above, use this meta-prompt to continue:\n\n';
+      md += '> I\'m ' + (intake.name || 'a learner') + ', a ' + intake.profession + ' who is curious about ' + intake.curiosity + '. I just went through a presentation on the Economics of AI that covered the full value chain: upstream costs (silicon, data, training, energy, talent), midstream market structure (oligopoly, open source, geopolitics), and downstream impacts (pricing, agentic AI, labor markets, inequality). During the presentation, I explored these specific topics: ' + topicsExplored + '. Based on what I\'ve shown interest in, continue my learning journey. Go deeper on the areas I explored, connect them to each other, and suggest new angles I might not have considered. Frame everything in terms of my profession and my specific curiosity.\n\n';
+      md += '---\n\n';
+      md += '*Generated from the Economics of AI Interactive Learning Resource*\n';
+      md += '*Presentation by Ashish Kulkarni \u2014 Takshashila Institution, GCPP Program*\n';
+
+      return md;
+    }
+
+    // Download
+    downloadBtn.addEventListener('click', function () {
+      var md = generateMd();
+      if (!md) return;
+      var blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'economics-of-ai-prompts-' + (intake.name ? intake.name.toLowerCase().replace(/\s+/g, '-') : 'learner') + '.md';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+
+    // Preview
+    previewBtn.addEventListener('click', function () {
+      previewBody.textContent = generateMd();
+      overlay.classList.add('open');
+    });
+
+    closeBtn.addEventListener('click', function () {
+      overlay.classList.remove('open');
+    });
+
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) overlay.classList.remove('open');
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') overlay.classList.remove('open');
+    });
+  })();
+  </script>
+</body>
+</html>

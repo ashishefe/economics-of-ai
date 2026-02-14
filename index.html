@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Economics of AI — Interactive Learning Resource</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="intro-layout">
+
+  <div class="intro-section">
+    <span class="intro-badge">Interactive Learning Resource</span>
+    <h1>Economics of AI</h1>
+    <p>
+      This site turns a lecture into something you can actually use afterward. You'll walk through
+      the slides at your own pace, and on each one you'll see small numbered circles marking the
+      ideas worth digging into. Hover over a circle to preview the prompt; click it to copy a
+      question tailored to your background. The star in the top-right corner of each slide is a
+      master prompt that covers the whole slide. Every prompt you click gets collected into a single
+      <code>.md</code> file you can download at the end.
+    </p>
+    <p>
+      That file is your conversation starter. Upload it along with the original <code>.pptx</code>
+      presentation into any LLM &mdash; Claude, ChatGPT, Gemini, whichever you prefer &mdash;
+      and it becomes a tutor that already knows who you are and what caught your attention. Feel
+      free to edit the file before uploading: add your own questions, remove prompts that don't
+      interest you, rearrange the order. The more you make it yours, the better the conversation
+      will be.
+    </p>
+  </div>
+
+  <div class="intake-container">
+    <h2>Tell us about yourself</h2>
+    <p class="subtitle">We'll use this to tailor the prompts to your background.</p>
+
+    <form id="intake-form">
+      <div class="form-group">
+        <label for="name">Your name <span class="optional">(optional)</span></label>
+        <input type="text" id="name" name="name" placeholder="e.g., Priya Sharma">
+      </div>
+
+      <div class="form-group">
+        <label for="profession">Your role or profession</label>
+        <input type="text" id="profession" name="profession" placeholder="e.g., policy analyst, journalist, CS student" required>
+        <p class="hint">This helps us frame AI concepts in terms relevant to your work.</p>
+      </div>
+
+      <div class="form-group">
+        <label for="curiosity">What are you most curious about regarding AI?</label>
+        <textarea id="curiosity" name="curiosity" placeholder="e.g., How will AI affect jobs in my industry? What should policymakers prioritize?" required></textarea>
+        <p class="hint">Your answer shapes the prompts you'll receive throughout the presentation.</p>
+      </div>
+
+      <button type="submit" class="btn btn-primary" id="start-btn">
+        Start Exploring
+        <span>&rarr;</span>
+      </button>
+    </form>
+
+    <p class="intake-privacy">
+      Your information stays in your browser. Nothing is sent to any server.
+    </p>
+  </div>
+
+  </div><!-- .intro-layout -->
+
+  <script>
+    // Pre-fill from localStorage if returning
+    const saved = localStorage.getItem('econ-ai-intake');
+    if (saved) {
+      const data = JSON.parse(saved);
+      if (data.name) document.getElementById('name').value = data.name;
+      if (data.profession) document.getElementById('profession').value = data.profession;
+      if (data.curiosity) document.getElementById('curiosity').value = data.curiosity;
+    }
+
+    document.getElementById('intake-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = {
+        name: document.getElementById('name').value.trim(),
+        profession: document.getElementById('profession').value.trim(),
+        curiosity: document.getElementById('curiosity').value.trim()
+      };
+      localStorage.setItem('econ-ai-intake', JSON.stringify(formData));
+      window.location.href = 'slides.html';
+    });
+  </script>
+</body>
+</html>

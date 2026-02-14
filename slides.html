@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Economics of AI — Slides</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Navigation Overlay -->
+  <div class="nav-overlay" id="nav-overlay"></div>
+
+  <!-- Navigation Drawer -->
+  <nav class="nav-drawer" id="nav-drawer">
+    <div class="nav-header">Economics of AI</div>
+    <ul class="nav-list" id="nav-list">
+      <!-- Populated by JS -->
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <button class="hamburger" id="hamburger-btn" aria-label="Open navigation">&#9776;</button>
+      <span class="header-title">Economics of AI</span>
+    </div>
+    <span class="header-progress" id="header-progress">Slide 1/20</span>
+  </header>
+
+  <!-- Main Content -->
+  <div class="main page-content">
+    <!-- Slide Image with Hotspots -->
+    <div class="slide-container" id="slide-container">
+      <div class="slide-image-wrapper" id="slide-image-wrapper">
+        <img id="slide-image" src="" alt="Slide" draggable="false">
+        <!-- Hotspot circles are injected here by JS -->
+      </div>
+
+      <!-- Slide Navigation -->
+      <div class="slide-nav">
+        <button class="btn btn-outline" id="prev-btn">&larr; Prev</button>
+        <button class="btn btn-outline" id="next-btn">Next &rarr;</button>
+      </div>
+
+      <!-- Mobile Prompt List -->
+      <div class="mobile-prompts" id="mobile-prompts">
+        <h3>Tap a prompt to copy</h3>
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bar -->
+  <div class="footer-bar">
+    <span class="prompt-count">
+      Prompts collected: <strong id="prompt-count">0</strong>
+    </span>
+    <button class="btn btn-primary" id="download-btn" style="font-size:0.85rem; padding:0.45rem 1rem;">
+      Download Prompts
+    </button>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
