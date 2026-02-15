@@ -127,6 +127,16 @@ code {
   letter-spacing: -0.01em;
 }
 
+.header-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.header-title-link:hover {
+  color: inherit;
+  opacity: 0.85;
+}
+
 .header-progress {
   font-size: 0.82rem;
   opacity: 0.7;
@@ -289,6 +299,35 @@ code {
   max-width: 960px;
   margin: 0 auto;
   padding: var(--space-md);
+}
+
+/* Desktop: two-column layout for slides + notes panel */
+@media (min-width: 961px) {
+  .main.page-content {
+    max-width: 1280px;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-lg);
+  }
+
+  .main.page-content .slide-container {
+    flex: 0 0 65%;
+    max-width: 65%;
+  }
+
+  .main.page-content .custom-prompt-panel {
+    flex: 0 0 calc(35% - var(--space-lg));
+    position: sticky;
+    top: 70px; /* header height + gap */
+    align-self: flex-start;
+    margin-top: 0;
+    padding-left: var(--space-md);
+    border-left: 1px solid var(--border-light);
+  }
+
+  .main.page-content .custom-prompt-textarea {
+    min-height: 200px;
+  }
 }
 
 /* ══════════════════════════════════════════
@@ -702,6 +741,46 @@ code {
   }
 }
 
+/* ── Custom Prompt Panel ── */
+.custom-prompt-panel {
+  margin-top: var(--space-md);
+}
+
+.custom-prompt-heading {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.custom-prompt-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 0.65rem 0.85rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: var(--card);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.custom-prompt-textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+.custom-prompt-textarea:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px var(--teal-glow);
+}
+
 /* ── Footer Bar ── */
 .footer-bar {
   position: fixed;
@@ -840,6 +919,49 @@ code {
   padding-top: var(--space-lg);
   border-top: 1px solid var(--border-light);
   text-align: center;
+}
+
+/* ── Contact Card ── */
+.contact-card {
+  margin-top: var(--space-xl);
+  padding: var(--space-lg);
+  background: var(--bg-warm);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+
+.contact-card h2 {
+  margin-top: 0;
+}
+
+.contact-card p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: var(--space-sm);
+}
+
+.contact-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── FAQ ── */
+.faq-item {
+  margin-bottom: var(--space-lg);
+}
+
+.faq-item h3 {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: var(--space-xs);
+}
+
+.faq-item p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
 }
 
 /* ── Preview Modal ── */

@@ -12,6 +12,7 @@
       <span style="font-size: 1.15rem; opacity: 0.85;">&larr;</span>
       <span class="header-title">How to Use Your Prompts</span>
     </a>
+    <a href="index.html" class="header-title-link" style="font-family: var(--font-serif); font-size: 0.85rem; font-weight: 500;">Economics of AI</a>
   </header>
 
   <div class="page-content">
@@ -64,6 +65,46 @@
         <li>Feel free to try different LLMs &mdash; each will give you a different perspective on the same material.</li>
       </ul>
 
+      <div class="contact-card">
+        <h2>Get in Touch</h2>
+        <p>
+          I'm an educator experimenting with AI to build better learning experiences. This site is one of those experiments &mdash; using AI to help people actually learn from a lecture, rather than just sit through one.
+        </p>
+        <p>
+          Questions, feedback, or ideas? I'd love to hear from you: <a href="mailto:ashish@econforeverybody.com">ashish@econforeverybody.com</a>
+        </p>
+      </div>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <h3>Why bother doing this?</h3>
+        <p>
+          What better application of the economics of AI? It's become cheap enough, intuitive enough, and good enough for all of us to experiment with. This is an experiment in what workflows AI unlocks.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Why not just use NotebookLM?</h3>
+        <p>
+          We're AND people, not OR people (h/t Navin Kabra). Use this AND NotebookLM. Upload the presentation and <code>.md</code> file into NotebookLM if you like. But this is a more focused way to revise a presentation &mdash; cleaner layout, revision-oriented. Use all the tools available, including NotebookLM.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Cool project! Can I try it myself?</h3>
+        <p>
+          Yes! The GitHub repo is at <a href="https://github.com/ashishefe/economics-of-ai" target="_blank">github.com/ashishefe/economics-of-ai</a> &mdash; free to play around with, understand, modify, share, and remix. The point is to experiment.
+        </p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Can I share the PPT, this site, or the GitHub repo?</h3>
+        <p>
+          Yes, absolutely &mdash; if you think it'll help other people learn better, please share, and thank you in advance.
+        </p>
+      </div>
+
       <div class="help-back">
         <button class="btn btn-primary" onclick="window.location.href='slides.html'">
           &larr; Back to Slides
@@ -92,6 +133,19 @@
     const intake = intakeRaw ? JSON.parse(intakeRaw) : null;
     const collectedRaw = sessionStorage.getItem('econ-ai-collected');
     const collectedPrompts = collectedRaw ? JSON.parse(collectedRaw) : [];
+    const customNotesRaw = sessionStorage.getItem('econ-ai-custom-notes');
+    const customNotes = customNotesRaw ? JSON.parse(customNotesRaw) : {};
+    const hasNotes = Object.keys(customNotes).length > 0;
+
+    const slideTitles = [
+      'Economics of AI', 'The Central Tension', 'The Pipeline: AI Economics',
+      'UPSTREAM: Cost Structure', 'Silicon & Infrastructure', 'Data: The New Constraint',
+      'Training vs. Inference', 'Energy & Talent', 'MIDSTREAM: Market Structure',
+      'The Two-Tier Oligopoly', 'Why Oligopoly Persists', 'Open Source: Competitive Force',
+      'Supply Chains & Geopolitics', 'DOWNSTREAM: Markets & Impacts', 'Pricing & Business Models',
+      'The Agentic Economy', 'Labor Markets & Productivity', 'Who Captures the Gains?',
+      'The Spine: 12 Takeaways', 'Thank You'
+    ];
 
     const downloadBtn = document.getElementById('help-download-btn');
     const previewBtn = document.getElementById('help-preview-btn');
@@ -101,15 +155,15 @@
     const closeBtn = document.getElementById('preview-close');
     const previewBody = document.getElementById('preview-body');
 
-    // Show empty state if no prompts
-    if (collectedPrompts.length === 0) {
+    // Show empty state if no prompts and no notes
+    if (collectedPrompts.length === 0 && !hasNotes) {
       actionsEl.style.display = 'none';
       emptyNote.style.display = 'block';
     }
 
     // Generate .md content
     function generateMd() {
-      if (!intake || collectedPrompts.length === 0) return '';
+      if (!intake || (collectedPrompts.length === 0 && !hasNotes)) return '';
 
       const date = new Date().toLocaleDateString('en-US', {
         year: 'numeric', month: 'long', day: 'numeric'
@@ -121,6 +175,14 @@
           grouped[p.slide] = { title: p.title, prompts: [] };
         }
         grouped[p.slide].prompts.push(p);
+      });
+
+      // Merge slides that have notes but no collected prompts
+      Object.keys(customNotes).forEach(function (slideNum) {
+        var n = Number(slideNum);
+        if (!grouped[n]) {
+          grouped[n] = { title: slideTitles[n - 1], prompts: [] };
+        }
       });
 
       const slideNumbers = Object.keys(grouped).map(Number).sort(function (a, b) { return a - b; });
@@ -158,6 +220,10 @@
           md += '**' + p.label + '**\n\n';
           md += p.prompt + '\n\n';
         });
+        if (customNotes[slideNum]) {
+          md += '**Your Notes**\n\n';
+          md += customNotes[slideNum] + '\n\n';
+        }
         md += '---\n\n';
       });
 

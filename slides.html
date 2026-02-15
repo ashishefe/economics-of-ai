@@ -12,7 +12,7 @@
 
   <!-- Navigation Drawer -->
   <nav class="nav-drawer" id="nav-drawer">
-    <div class="nav-header">Economics of AI</div>
+    <div class="nav-header"><a href="index.html" style="color: inherit; text-decoration: none;">Economics of AI</a></div>
     <ul class="nav-list" id="nav-list">
       <!-- Populated by JS -->
     </ul>
@@ -22,7 +22,7 @@
   <header class="header">
     <div class="header-left">
       <button class="hamburger" id="hamburger-btn" aria-label="Open navigation">&#9776;</button>
-      <span class="header-title">Economics of AI</span>
+      <a href="index.html" class="header-title-link"><span class="header-title">Economics of AI</span></a>
     </div>
     <span class="header-progress" id="header-progress">Slide 1/20</span>
   </header>
@@ -47,6 +47,16 @@
         <h3>Tap a prompt to copy</h3>
         <!-- Populated by JS -->
       </div>
+    </div>
+
+    <!-- Custom Prompt Panel (desktop: side column, mobile: below prompts) -->
+    <div class="custom-prompt-panel" id="custom-prompt-panel">
+      <h3 class="custom-prompt-heading">Your Notes</h3>
+      <textarea
+        class="custom-prompt-textarea"
+        id="custom-notes-textarea"
+        placeholder="Have additional thoughts about this slide? Type them here — they'll be included in your .md file."
+      ></textarea>
     </div>
   </div>
 

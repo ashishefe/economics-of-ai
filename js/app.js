@@ -49,6 +49,7 @@
   const navList = document.getElementById('nav-list');
   const hamburgerBtn = document.getElementById('hamburger-btn');
   const mobilePrompts = document.getElementById('mobile-prompts');
+  const customNotesTextarea = document.getElementById('custom-notes-textarea');
 
   // ── Init ──
   function init() {
@@ -104,8 +105,14 @@
     hamburgerBtn.addEventListener('click', toggleNav);
     navOverlay.addEventListener('click', toggleNav);
 
-    // Keyboard navigation
+    // Custom notes textarea — auto-save on input
+    customNotesTextarea.addEventListener('input', function () {
+      saveCustomNote(currentSlide, customNotesTextarea.value);
+    });
+
+    // Keyboard navigation (disabled when typing in textarea)
     document.addEventListener('keydown', (e) => {
+      if (e.target === customNotesTextarea) return;
       if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
         if (currentSlide <= 1) window.location.href = 'index.html';
         else goToSlide(currentSlide - 1);
@@ -149,6 +156,9 @@
     // Render hotspots and master prompt
     renderHotspots();
     renderMobilePrompts();
+
+    // Load custom note for this slide
+    loadCustomNoteForSlide();
   }
 
   function renderHotspots() {
@@ -408,10 +418,34 @@
     navDrawer.classList.remove('open');
   }
 
+  // ── Custom Notes ──
+  function getCustomNotes() {
+    var raw = sessionStorage.getItem('econ-ai-custom-notes');
+    return raw ? JSON.parse(raw) : {};
+  }
+
+  function saveCustomNote(slideNum, text) {
+    var notes = getCustomNotes();
+    if (text.trim()) {
+      notes[slideNum] = text;
+    } else {
+      delete notes[slideNum];
+    }
+    sessionStorage.setItem('econ-ai-custom-notes', JSON.stringify(notes));
+  }
+
+  function loadCustomNoteForSlide() {
+    var notes = getCustomNotes();
+    customNotesTextarea.value = notes[currentSlide] || '';
+  }
+
   // ── .md Export ──
   function downloadMd() {
-    if (collectedPrompts.length === 0) {
-      showToast('Click some prompts first, then download!');
+    var customNotes = getCustomNotes();
+    var hasNotes = Object.keys(customNotes).length > 0;
+
+    if (collectedPrompts.length === 0 && !hasNotes) {
+      showToast('Click some prompts or add notes first, then download!');
       return;
     }
 
@@ -474,14 +508,29 @@ Format the Learning Pack clearly with headers and bullet points so the learner c
 
 The learner clicked on these prompts during the presentation. Handle them **one at a time**, in order.\n\n`;
 
-    // Add each prompt grouped by slide
-    slideNumbers.forEach((slideNum, idx) => {
+    // Merge slides that have notes but no collected prompts
+    Object.keys(customNotes).forEach(slideNum => {
+      const n = Number(slideNum);
+      if (!grouped[n]) {
+        grouped[n] = { title: slideTitles[n - 1], prompts: [] };
+      }
+    });
+
+    const allSlideNumbers = Object.keys(grouped).map(Number).sort((a, b) => a - b);
+    const topicsAll = allSlideNumbers.map(n => grouped[n].title).join(', ');
+
+    // Add each prompt grouped by slide, with custom notes
+    allSlideNumbers.forEach((slideNum, idx) => {
       const group = grouped[slideNum];
       md += `### ${idx + 1}. Slide ${slideNum}: ${group.title}\n\n`;
       group.prompts.forEach(p => {
         md += `**${p.label}**\n\n`;
         md += `${p.prompt}\n\n`;
       });
+      if (customNotes[slideNum]) {
+        md += `**Your Notes**\n\n`;
+        md += `${customNotes[slideNum]}\n\n`;
+      }
       md += `---\n\n`;
     });
 
@@ -490,7 +539,7 @@ The learner clicked on these prompts during the presentation. Handle them **one 
 
 Once you've worked through all the prompts above, use this meta-prompt to continue:
 
-> I'm ${intake.name || 'a learner'}, a ${intake.profession} who is curious about ${intake.curiosity}. I just went through a presentation on the Economics of AI that covered the full value chain: upstream costs (silicon, data, training, energy, talent), midstream market structure (oligopoly, open source, geopolitics), and downstream impacts (pricing, agentic AI, labor markets, inequality). During the presentation, I explored these specific topics: ${topicsExplored}. Based on what I've shown interest in, continue my learning journey. Go deeper on the areas I explored, connect them to each other, and suggest new angles I might not have considered. Frame everything in terms of my profession and my specific curiosity.
+> I'm ${intake.name || 'a learner'}, a ${intake.profession} who is curious about ${intake.curiosity}. I just went through a presentation on the Economics of AI that covered the full value chain: upstream costs (silicon, data, training, energy, talent), midstream market structure (oligopoly, open source, geopolitics), and downstream impacts (pricing, agentic AI, labor markets, inequality). During the presentation, I explored these specific topics: ${topicsAll}. Based on what I've shown interest in, continue my learning journey. Go deeper on the areas I explored, connect them to each other, and suggest new angles I might not have considered. Frame everything in terms of my profession and my specific curiosity.
 
 ---
 
